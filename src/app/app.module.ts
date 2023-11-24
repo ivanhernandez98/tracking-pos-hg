@@ -134,6 +134,8 @@ import { FormsModule } from '@angular/forms';
     InputTextModule,
     RadioButtonModule,
     MultiSelectModule,
+    AccordionModule,
+    FieldsetModule,
     AppRoutingModule
   ],
   providers: [],

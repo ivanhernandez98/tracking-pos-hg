@@ -10,7 +10,7 @@ export interface PosicionViaje {
   }[];
   dataSingle: {
     shipment: string;
-    fechaRealViaje: Date;
-    fechaRealFinViaje: Date;
+    fecha_real_viaje: Date;
+    fecha_real_fin_viaje: Date;
   };
 }

@@ -19,11 +19,16 @@ export class BodyComponent implements OnInit {
   title = 'googlemaps';
 
   formGroup: FormGroup = new FormGroup({}); // Inicializa como un objeto FormGroup vacío
+  mostrarDetalles: boolean = true;
 
   empresas: Empresa[] | undefined;
   selectedEmpresa: Empresa | undefined;
 
   numeroViaje: number | undefined;
+  unidad: string | undefined;
+  fechaIniViaje: string | undefined;
+  fechaFinViaje: string | undefined;
+  sistema: string | undefined;
 
   constructor(private apiService: ApiPosicionViajesServicesService) {}
 
@@ -32,7 +37,11 @@ export class BodyComponent implements OnInit {
     Text: 'Marcador'
   }
 
-  positions = [ { lat: 0, lng: 0 } ];
+  positions = [ { lat: 19.42847, lng: -99.12766 }];
+
+  toggleDetails() {
+    this.mostrarDetalles = !this.mostrarDetalles;
+  }
 
   ngOnInit() {
     this.empresas = [
@@ -48,6 +57,18 @@ export class BodyComponent implements OnInit {
 
     // Obtener la posición actual del usuario al inicio
     this.getCurrentLocation();
+  }
+
+  private formatFecha(fecha: string): string {
+    const fechaDate = new Date(fecha);
+    const horas = fechaDate.getHours();
+    const amPm = horas >= 12 ? 'PM' : 'AM';
+    const formattedFecha = `${this.padZero(fechaDate.getDate())}-${this.padZero(fechaDate.getMonth() + 1)}-${fechaDate.getFullYear()} ${this.padZero(horas % 12 || 12)}:${this.padZero(fechaDate.getMinutes())} ${amPm}`;
+    return formattedFecha;
+  }
+
+  private padZero(num: number): string {
+    return num < 10 ? `0${num}` : num.toString();
   }
 
   getCurrentLocation() {
@@ -77,12 +98,22 @@ export class BodyComponent implements OnInit {
     if (this.selectedEmpresa && this.numeroViajeInput) {
       const numeroViaje = this.numeroViajeInput.nativeElement.value;
       const empresa = this.selectedEmpresa.toString().toLocaleLowerCase();
+
       this.positions = [];
+      this.fechaFinViaje= '';
+      this.fechaIniViaje= '';
+      this.sistema = '';
 
       if (this.selectedEmpresa) {
         this.apiService.obtenerPosicionViaje(numeroViaje, empresa).subscribe({
           next: response => {
-            console.log(response);
+
+            this.unidad         = response.dataSingle.shipment.toString();
+            this.fechaIniViaje = this.formatFecha(response.dataSingle.fecha_real_viaje.toString());
+            this.fechaFinViaje = this.formatFecha(response.dataSingle.fecha_real_fin_viaje.toString());
+            this.sistema = response.dataList[0].sistema_origen.toString();
+
+            console.log(this.unidad,this.fechaIniViaje,this.fechaFinViaje,this.sistema);
 
             // Mapear las coordenadas posLat y posLon a positions
             const positions = response.dataList.map(item => ({
@@ -91,9 +122,6 @@ export class BodyComponent implements OnInit {
             }));
 
             this.positions = positions;
-
-            console.log(positions);
-            // Aquí puedes manejar la respuesta del API según tus necesidades
           },
           error: (error: any) => {
             console.error('Error al obtener la posición del viaje:', error);

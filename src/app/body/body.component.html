@@ -17,12 +17,48 @@
         </div>
 
 
-        <span class="p-float-label" style="margin-top: 20px;">
+        <span class="p-float-label" style="margin-top: 20px; margin-bottom: 20px;">
           <input #numeroViajeInput id="float-input" pKeyFilter="int" class="w-full" size="30" pInputText>
           <label for="float-input">Numero de Viaje</label>
           <p-button icon="pi pi-search" severity="success" (click)="MarcarPosicion()"></p-button>
         </span>
 
+
+        <p-accordion class="w-full">
+          <p-accordionTab (click)="toggleDetails()">
+            <ng-template pTemplate="header">
+              <div class="flex align-items-center">
+                <i class="pi pi-cog ml-2 ml-2"></i>
+                <span class="vertical-align-middle"> Detalles</span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+
+              <!-- Contenido que se mostrará/ocultará -->
+              <div *ngIf="mostrarDetalles">
+                <span class="p-float-label" style="margin-top: 20px;">
+                  <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="sistema" />
+                  <label for="float-input">Sistema Origen</label>
+                </span>
+
+                <span class="p-float-label" style="margin-top: 20px;">
+                  <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="fechaIniViaje" />
+                  <label for="float-input">Fecha Inicio</label>
+                </span>
+
+                <span class="p-float-label" style="margin-top: 20px;">
+                  <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="fechaFinViaje" />
+                  <label for="float-input">Fecha Fin</label>
+                </span>
+
+                <span class="p-float-label" style="margin-top: 20px;">
+                  <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="unidad" />
+                  <label for="float-input">Shipment</label>
+                </span>
+              </div>
+            </ng-template>
+          </p-accordionTab>
+        </p-accordion>
 
       </div>
     </p-card>
