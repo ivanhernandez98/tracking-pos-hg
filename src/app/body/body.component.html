@@ -1,0 +1,52 @@
+
+<div class="row" style="display: flex; justify-content: space-around; flex-wrap: wrap; padding: 2rem 2rem 2rem 4rem;;">
+  <div class="col-md-4" >
+    <p-card header="Rastreo de viaje">
+      <div>
+
+      <span class="p-float-label">
+          <p-dropdown [options]="empresas" [(ngModel)]="selectedEmpresa" placeholder="Select a City" optionLabel="name" inputId="float-label"></p-dropdown>
+          <label for="float-label">Select a City</label>
+      </span>
+
+        <span class="p-float-label">
+            <input id="float-input" pKeyFilter="int" class="w-full"  size="30" pInputText>
+            <label for="float-input">Numero de Viaje</label>
+            <p-button icon="pi pi-search" severity="success"></p-button>
+        </span>
+      </div>
+    </p-card>
+  </div>
+  <div class="col-md-8">
+    <div class="card flex justify-content-center">
+      <google-map [center]="positions[0]" width="1200px" height="700px">
+
+        <!-- Traza las lineas desde el Inicio al Fin sobre el mapa -->
+        <map-polyline
+          [path]="positions"
+          [options]="{ strokeColor: '#FF0000', strokeWeight: 7 }"
+        >
+        </map-polyline>
+
+        <!-- Marca el Punto de Inicio sobre el mapa -->
+        <map-marker
+        *ngIf="positions.length > 0"
+        [position]="positions[0]"
+        label="A"
+        title="Punto de Inicio"
+        >
+        </map-marker>
+
+        <!-- Marca el Punto Final sobre el mapa -->
+        <map-marker
+          *ngIf="positions.length > 1"
+          [position]="positions[positions.length - 1]"
+          label="B"
+          title="Punto Final"
+        >
+        </map-marker>
+
+      </google-map>
+    </div>
+  </div>
+</div>
