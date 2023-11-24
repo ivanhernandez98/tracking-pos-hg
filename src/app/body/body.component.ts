@@ -34,11 +34,6 @@ export class BodyComponent implements OnInit {
 
   positions = [
     { lat: 25.721836, lng: -100.118597 },
-    { lat: 25.719224, lng: -100.119968 },
-    { lat: 25.721836, lng: -100.118597 },
-    { lat: 25.721836, lng: -100.118597 },
-    { lat: 25.721836, lng: -100.118597 },
-    { lat: 25.741783, lng: -100.128607 },
     { lat: 25.742823, lng: -100.128608 }
   ];
 
@@ -59,19 +54,28 @@ export class BodyComponent implements OnInit {
     if (this.selectedEmpresa && this.numeroViajeInput) {
       const numeroViaje = this.numeroViajeInput.nativeElement.value;
       const empresa = this.selectedEmpresa.toString().toLocaleLowerCase();
-      console.log('Empresa seleccionada:', empresa);
-      console.log('Número de viaje ingresado:', numeroViaje);
+      this.positions = [];
 
       if (this.selectedEmpresa) {
-        this.apiService.obtenerPosicionViaje(numeroViaje, empresa).subscribe(
-            response => {
-              console.log(response);
-              // Aquí puedes manejar la respuesta del API según tus necesidades
-            },
-            error => {
-              console.error('Error al obtener la posición del viaje:', error);
-            }
-          );
+        this.apiService.obtenerPosicionViaje(numeroViaje, empresa).subscribe({
+          next: response => {
+            console.log(response);
+
+            // Mapear las coordenadas posLat y posLon a positions
+            const positions = response.dataList.map(item => ({
+              lat: item.posLat,
+              lng: item.posLon,
+            }));
+
+            this.positions = positions;
+
+            console.log(positions);
+            // Aquí puedes manejar la respuesta del API según tus necesidades
+          },
+          error: (error: any) => {
+            console.error('Error al obtener la posición del viaje:', error);
+          }
+        });
       } else {
         console.error('El código de la empresa seleccionada es undefined.');
       }
@@ -79,5 +83,6 @@ export class BodyComponent implements OnInit {
       console.log('Por favor, selecciona una empresa y proporciona un número de viaje.');
     }
   }
+
 
 }
