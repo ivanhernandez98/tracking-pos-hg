@@ -4,20 +4,30 @@
     <p-card header="Rastreo de viaje">
       <div>
 
-      <span class="p-float-label">
-          <p-dropdown [options]="empresas" [(ngModel)]="selectedEmpresa" placeholder="Select a City" optionLabel="name" inputId="float-label"></p-dropdown>
-          <label for="float-label">Select a City</label>
-      </span>
+        <div class="flex flex-wrap gap-3" style="display: flex; justify-content: space-between;">
+          <div *ngFor="let empresa of empresas" class="flex align-items-center">
+            <p-radioButton
+              name="empresa"
+              [value]="empresa.code"
+              [(ngModel)]="selectedEmpresa"
+              inputId="{{ 'ingredient' + empresa.code }}"
+            ></p-radioButton>
+            <label [for]="'ingredient' + empresa.code" class="ml-2">{{ empresa.name }}</label>
+          </div>
+        </div>
 
-        <span class="p-float-label">
-            <input id="float-input" pKeyFilter="int" class="w-full"  size="30" pInputText>
-            <label for="float-input">Numero de Viaje</label>
-            <p-button icon="pi pi-search" severity="success"></p-button>
+
+        <span class="p-float-label" style="margin-top: 20px;">
+          <input #numeroViajeInput id="float-input" pKeyFilter="int" class="w-full" size="30" pInputText>
+          <label for="float-input">Numero de Viaje</label>
+          <p-button icon="pi pi-search" severity="success" (click)="MarcarPosicion()"></p-button>
         </span>
+
+
       </div>
     </p-card>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-8" style="margin-top: 20px;">
     <div class="card flex justify-content-center">
       <google-map [center]="positions[0]" width="1200px" height="700px">
 

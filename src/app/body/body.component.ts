@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
 import { Empresa } from '../model/Empresa';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ApiPosicionViajesServicesService } from '../data/api-posicion-viajes.service';
+
 
 @Component({
   selector: 'app-body',
@@ -12,13 +14,18 @@ export class BodyComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) info!: MapInfoWindow;
 
+  @ViewChild('numeroViajeInput', { static: false }) numeroViajeInput!: ElementRef;
+
   title = 'googlemaps';
 
   formGroup: FormGroup = new FormGroup({}); // Inicializa como un objeto FormGroup vacío
+
   empresas: Empresa[] | undefined;
   selectedEmpresa: Empresa | undefined;
 
-  constructor() {}
+  numeroViaje: number | undefined;
+
+  constructor(private apiService: ApiPosicionViajesServicesService) {}
 
   label = {
     color: 'red',
@@ -35,20 +42,43 @@ export class BodyComponent implements OnInit {
     { lat: 25.742823, lng: -100.128608 }
   ];
 
-
   ngOnInit() {
     this.empresas = [
-      { name: 'HG Transportaciones', code: 'hgdb_lis' },
-      { name: 'CH Transportaciones', code: 'chdb_lis' },
-      { name: 'Linda Transportaciones', code: 'lindadb' },
-      { name: 'RL Transportaciones', code: 'rldb_lis' }
+      { name: 'HG', code: 'hgdb_lis' },
+      { name: 'CH', code: 'chdb_lis' },
+      { name: 'Linda', code: 'lindadb' },
+      { name: 'RL', code: 'rldb_lis' }
     ];
-
-    console.log(this.empresas);
 
     this.formGroup = new FormGroup({
       selectedEmpresa: new FormControl<Empresa | null>(null)
-   });
-
+    });
   }
+
+  MarcarPosicion() {
+    if (this.selectedEmpresa && this.numeroViajeInput) {
+      const numeroViaje = this.numeroViajeInput.nativeElement.value;
+      const empresa = this.selectedEmpresa.toString().toLocaleLowerCase();
+      console.log('Empresa seleccionada:', empresa);
+      console.log('Número de viaje ingresado:', numeroViaje);
+
+      if (this.selectedEmpresa) {
+        this.apiService.obtenerPosicionViaje(numeroViaje, empresa)
+          .subscribe(
+            posicionViaje => {
+              console.log(posicionViaje);
+              // Aquí puedes manejar la respuesta del API según tus necesidades
+            },
+            error => {
+              console.error('Error al obtener la posición del viaje:', error);
+            }
+          );
+      } else {
+        console.error('El código de la empresa seleccionada es undefined.');
+      }
+    } else {
+      console.log('Por favor, selecciona una empresa y proporciona un número de viaje.');
+    }
+  }
+
 }

@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // Import PrimeNG modules
 import { AccordionModule } from 'primeng/accordion';
@@ -105,7 +106,7 @@ import { AnimateModule } from 'primeng/animate';
 import { CardModule } from 'primeng/card';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -115,99 +116,24 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     FooterComponent
   ],
   imports: [
+    // Módulos de Angular
     BrowserModule,
     KeyFilterModule,
-    GoogleMapsModule,
+    FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
 
-    AvatarModule,
-    AvatarGroupModule,
-    AccordionModule,
-    AutoCompleteModule,
-    BadgeModule,
-    BreadcrumbModule,
-    BlockUIModule,
-    ButtonModule,
-    CalendarModule,
-    CarouselModule,
-    CascadeSelectModule,
-    ChartModule,
-    CheckboxModule,
-    ChipsModule,
-    ChipModule,
-    ColorPickerModule,
-    ConfirmDialogModule,
-    ConfirmPopupModule,
-    ContextMenuModule,
-    VirtualScrollerModule,
-    DataViewModule,
-    DialogModule,
-    DividerModule,
-    DockModule,
+    // Módulos de terceros
+    GoogleMapsModule,
     DropdownModule,
-    DynamicDialogModule,
-    EditorModule,
-    FieldsetModule,
-    FileUploadModule,
-    GalleriaModule,
+    CardModule,
+    ButtonModule,
+    MenubarModule,
     InplaceModule,
     InputMaskModule,
-    InputSwitchModule,
     InputTextModule,
-    InputTextareaModule,
-    InputNumberModule,
-    ImageModule,
-    KnobModule,
-    ListboxModule,
-    MegaMenuModule,
-    MenuModule,
-    MenubarModule,
-    MessageModule,
-    MessagesModule,
-    MultiSelectModule,
-    OrganizationChartModule,
-    OrderListModule,
-    OverlayPanelModule,
-    PaginatorModule,
-    PanelModule,
-    PanelMenuModule,
-    PasswordModule,
-    PickListModule,
-    ProgressSpinnerModule,
-    ProgressBarModule,
     RadioButtonModule,
-    RatingModule,
-    SelectButtonModule,
-    SidebarModule,
-    ScrollerModule,
-    ScrollPanelModule,
-    ScrollTopModule,
-    SkeletonModule,
-    SlideMenuModule,
-    SliderModule,
-    SpeedDialModule,
-    SpinnerModule,
-    SplitterModule,
-    SplitButtonModule,
-    StepsModule,
-    TableModule,
-    TabMenuModule,
-    TabViewModule,
-    TagModule,
-    TerminalModule,
-    TieredMenuModule,
-    TimelineModule,
-    ToastModule,
-    ToggleButtonModule,
-    ToolbarModule,
-    TooltipModule,
-    TriStateCheckboxModule,
-    TreeModule,
-    TreeSelectModule,
-    TreeTableModule,
-    AnimateModule,
-    CardModule,
-
+    MultiSelectModule,
     AppRoutingModule
   ],
   providers: [],
