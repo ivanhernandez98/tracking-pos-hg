@@ -63,10 +63,9 @@ export class BodyComponent implements OnInit {
       console.log('Número de viaje ingresado:', numeroViaje);
 
       if (this.selectedEmpresa) {
-        this.apiService.obtenerPosicionViaje(numeroViaje, empresa)
-          .subscribe(
-            posicionViaje => {
-              console.log(posicionViaje);
+        this.apiService.obtenerPosicionViaje(numeroViaje, empresa).subscribe(
+            response => {
+              console.log(response);
               // Aquí puedes manejar la respuesta del API según tus necesidades
             },
             error => {
