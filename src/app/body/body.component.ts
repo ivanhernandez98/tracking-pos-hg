@@ -32,10 +32,7 @@ export class BodyComponent implements OnInit {
     Text: 'Marcador'
   }
 
-  positions = [
-    { lat: 25.721836, lng: -100.118597 },
-    { lat: 25.742823, lng: -100.128608 }
-  ];
+  positions = [ { lat: 0, lng: 0 } ];
 
   ngOnInit() {
     this.empresas = [
@@ -48,6 +45,32 @@ export class BodyComponent implements OnInit {
     this.formGroup = new FormGroup({
       selectedEmpresa: new FormControl<Empresa | null>(null)
     });
+
+    // Obtener la posición actual del usuario al inicio
+    this.getCurrentLocation();
+  }
+
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const currentLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          // Puedes agregar la posición actual al array positions si es necesario
+          this.positions.push(currentLocation);
+
+          console.log('Posición actual:', currentLocation);
+        },
+        (error) => {
+          console.error('Error al obtener la posición actual:', error);
+        }
+      );
+    } else {
+      console.error('Geolocalización no es compatible en este navegador.');
+    }
   }
 
   MarcarPosicion() {

@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'navbar', component: NavbarComponent },
   { path: 'body', component: BodyComponent },
   { path: 'footer', component: FooterComponent },
-  { path: '', redirectTo: '/navbar', pathMatch: 'full' },
+  { path: '', redirectTo: '/body', pathMatch: 'full' },
 ];
 
 @NgModule({
