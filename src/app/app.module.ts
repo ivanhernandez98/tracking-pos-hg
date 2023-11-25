@@ -2,6 +2,8 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -118,6 +120,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     // Módulos de Angular
     BrowserModule,
+    BrowserAnimationsModule,
     KeyFilterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -133,8 +136,12 @@ import { FormsModule } from '@angular/forms';
     InputMaskModule,
     InputTextModule,
     RadioButtonModule,
+    ToastModule,
+    AnimateModule,
     MultiSelectModule,
+    SelectButtonModule,
     AccordionModule,
+    StepsModule,
     FieldsetModule,
     AppRoutingModule
   ],

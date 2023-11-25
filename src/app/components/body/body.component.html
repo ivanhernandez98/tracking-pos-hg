@@ -1,9 +1,7 @@
 
-<div class="row" style="display: flex; justify-content: space-around; flex-wrap: wrap; padding: 2rem 2rem 2rem 4rem;;">
-  <div class="col-md-4" >
-    <p-card header="Rastreo de viaje">
-      <div>
-
+<div class="row" sty>
+  <div class="col-md-6" >
+    <p-card header="Rastreo de posiciones satelitales" class="custom-card">
         <div class="flex flex-wrap gap-3" style="display: flex; justify-content: space-between;">
           <div *ngFor="let empresa of empresas" class="flex align-items-center">
             <p-radioButton
@@ -16,30 +14,43 @@
           </div>
         </div>
 
+        <div class="row" style="display: flex; align-items: center;">
+          <form [formGroup]="formGroup">
+            <p-selectButton [options]="stateOptions" formControlName="value" optionLabel="label" optionValue="value"></p-selectButton>
+          </form>
 
-        <span class="p-float-label" style="margin-top: 20px; margin-bottom: 20px;">
-          <input #numeroViajeInput id="float-input" pKeyFilter="int" class="w-full" size="30" pInputText>
-          <label for="float-input">Numero de Viaje</label>
-          <p-button icon="pi pi-search" severity="success" (click)="MarcarPosicion()"></p-button>
-        </span>
+          <span class="p-float-label" style="margin-top: 20px; margin-bottom: 20px;">
+            <input #numeroViajeInput id="float-input" pKeyFilter="int" class="w-full" size="30" pInputText>
+            <label for="float-input">Busqueda por V(Viaje) o P(Pedido)</label>
+            <p-button icon="pi pi-search" severity="success" (click)="MarcarPosicion()"></p-button>
+          </span>
+        </div>
 
+        <p-steps [model]="items" [readonly]="true" [(activeIndex)]="activeIndex"></p-steps>
 
         <p-accordion class="w-full">
-          <p-accordionTab (click)="toggleDetails()">
-            <ng-template pTemplate="header">
+          <p-accordionTab >
+            <ng-template pTemplate="header" (click)="toggleDetails()">
               <div class="flex align-items-center">
                 <i class="pi pi-cog ml-2 ml-2"></i>
                 <span class="vertical-align-middle"> Detalles</span>
               </div>
             </ng-template>
-            <ng-template pTemplate="content">
-
-
-              <!-- Contenido que se mostrará/ocultará -->
+            <ng-template pTemplate="content">  <!-- Contenido que se mostrará/ocultará -->
               <div *ngIf="mostrarDetalles">
                 <span class="p-float-label" style="margin-top: 20px;">
                   <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="sistema" />
                   <label for="float-input">Sistema Origen</label>
+                </span>
+
+                <span class="p-float-label" style="margin-top: 20px;">
+                  <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="shipment" />
+                  <label for="float-input">Shipment</label>
+                </span>
+
+                <span class="p-float-label" style="margin-top: 20px;">
+                  <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="unidad" />
+                  <label for="float-input">Unidad</label>
                 </span>
 
                 <span class="p-float-label" style="margin-top: 20px;">
@@ -51,22 +62,18 @@
                   <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="fechaFinViaje" />
                   <label for="float-input">Fecha Fin</label>
                 </span>
-
-                <span class="p-float-label" style="margin-top: 20px;">
-                  <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="unidad" />
-                  <label for="float-input">Shipment</label>
-                </span>
               </div>
             </ng-template>
           </p-accordionTab>
         </p-accordion>
-
-      </div>
     </p-card>
   </div>
+
+
+
   <div class="col-md-8">
     <div class="card flex justify-content-center">
-      <google-map [center]="positions[0]" width="1200px" height="700px">
+      <google-map [center]="positions[0]" [width]="'100%'" [height]="'600px'">
 
         <!-- Traza las lineas desde el Inicio al Fin sobre el mapa -->
         <map-polyline
@@ -81,19 +88,24 @@
         [position]="positions[0]"
         label="A"
         title="Punto de Inicio"
+        class="marker-a"
         >
         </map-marker>
 
         <!-- Marca el Punto Final sobre el mapa -->
         <map-marker
-          *ngIf="positions.length > 1"
-          [position]="positions[positions.length - 1]"
-          label="B"
-          title="Punto Final"
+        *ngIf="positions.length > 1"
+        [position]="positions[positions.length - 1]"
+        label="B"
+        title="Punto Final"
+        class="marker-b"
         >
         </map-marker>
 
       </google-map>
     </div>
   </div>
+
 </div>
+
+<p-toast position="bottom-center" key="bc"></p-toast>

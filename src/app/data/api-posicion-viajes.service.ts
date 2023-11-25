@@ -11,8 +11,8 @@
 
     constructor(private http: HttpClient) {}
 
-    obtenerPosicionViaje(noViaje: number, empresa: string): Observable<PosicionViaje> {
-      const url = `${this.apiUrl}?noViaje=${noViaje}&empresa=${empresa}`;
+    obtenerPosicionViaje(noViaje: number, empresa: string, tipoSolicitud: number): Observable<PosicionViaje> {
+      const url = `${this.apiUrl}?noViaje=${noViaje}&empresa=${empresa}&tipoSolicitud=${tipoSolicitud}`;
       return this.http.get<PosicionViaje>(url);
     }
   }

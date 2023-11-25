@@ -10,6 +10,8 @@ export interface PosicionViaje {
   }[];
   dataSingle: {
     shipment: string;
+    remitente: string;
+    destinatario: string;
     fecha_real_viaje: Date;
     fecha_real_fin_viaje: Date;
   };

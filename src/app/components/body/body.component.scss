@@ -1,0 +1,145 @@
+.row {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(150px,1fr)
+  );
+  gap: 32px;
+
+  .col-md-6 {
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+
+    .custom-card{
+      display: grid;
+      height: 100%;
+      width: 100%;
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+
+      label {
+        margin-left: 0.5rem; // Ajusta el margen entre el radio button y la etiqueta
+      }
+    }
+
+    .p-float-label {
+      display: flex;
+      justify-content: center;
+      justify-items: center;
+
+      input {
+        width: 100%;
+      }
+    }
+
+    p-accordion {
+      width: 100%;
+
+      p-accordionTab {
+        cursor: pointer;
+
+        .flex {
+          align-items: center;
+
+          i {
+            margin-left: 0.5rem;
+          }
+        }
+
+        .p-float-label {
+          display: flex;
+          justify-content: center;
+          justify-items: center;
+
+        }
+      }
+    }
+  }
+
+  .col-md-8 {
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+
+    .card {
+      border-radius: 8px;
+      width: 100%;
+      height: auto;
+
+      google-map {
+        width: 900px;
+        height: 600px;
+
+        // Estilos para map-polyline
+        map-polyline {
+          stroke: #FF0000; // Color de la línea
+          stroke-width: 7; // Grosor de la línea
+        }
+
+        map-marker {
+          label {
+            background-color: #FFFFFF;
+            color: #000000;
+            border: 1px solid #000000;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+          }
+
+          .marker-a {
+            label::before {
+              content: "";
+              display: block;
+              width: 10px; // Tamaño del círculo blanco
+              height: 10px;
+              background-color: #FFFFFF;
+              border-radius: 50%;
+              position: absolute;
+              top: -5px; // Ajusta la posición del círculo según sea necesario
+              left: -5px;
+            }
+          }
+
+          &.a {
+            // Estilos específicos para el marcador A (Punto de Inicio)
+
+            // Añadir círculo blanco
+            &::before {
+              content: "";
+              display: block;
+              width: 10px; // Tamaño del círculo
+              height: 10px;
+              background-color: #FFFFFF;
+              border-radius: 50%;
+              position: absolute;
+              top: -5px; // Ajusta la posición del círculo según sea necesario
+              left: -5px;
+            }
+          }
+
+          &.b {
+            // Estilos específicos para el marcador B (Punto Final)
+
+            // Añadir icono de camión
+            i {
+              font-size: 1.5rem; // Ajusta el tamaño del icono según sea necesario
+              color: #FF0000; // Color del icono
+            }
+          }
+
+          .marker-b {
+            label {
+              i {
+                font-size: 1.5rem; // Tamaño del icono de camión
+                color: #FF0000; // Color del icono de camión
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
