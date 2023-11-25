@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
-import { Empresa } from '../model/Empresa';
+import { Empresa } from '../../model/Empresa';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ApiPosicionViajesServicesService } from '../data/api-posicion-viajes.service';
+import { ApiPosicionViajesServicesService } from '../../data/api-posicion-viajes.service';
 
 
 @Component({

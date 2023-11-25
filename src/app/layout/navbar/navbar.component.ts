@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { LayoutService } from '../layout.service';
+import { LayoutService } from '../../layout.service';
 
 @Component({
   selector: 'app-navbar',

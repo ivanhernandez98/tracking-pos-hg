@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 /* COMPONENT DEL LAYOUT */
-import { NavbarComponent } from './navbar/navbar.component';
-import { BodyComponent } from './body/body.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { BodyComponent } from './components/body/body.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 const routes: Routes = [
   { path: 'navbar', component: NavbarComponent },

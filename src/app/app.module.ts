@@ -7,9 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 /* COMPONENTES DEL LAYOUT */
-import { NavbarComponent } from './navbar/navbar.component';
-import { BodyComponent } from './body/body.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { BodyComponent } from './components/body/body.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 /* COMPONENTS PARA VISTA */
 
