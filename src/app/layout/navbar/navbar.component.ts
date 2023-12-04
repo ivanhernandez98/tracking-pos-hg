@@ -10,8 +10,8 @@ import { LayoutService } from '../../layout.service';
 export class NavbarComponent {
 
   items: MenuItem[] = [
-    { label: 'Inicio', routerLink: '' },
-    { label: 'Contenido', routerLink: '/body' },
+    { label: 'Inicio', routerLink: '/body' },
+    //{ label: 'Contenido', routerLink: '/body' },
     { label: 'Pie de página', routerLink: '/footer' },
   ];
 

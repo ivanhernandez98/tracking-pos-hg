@@ -12,12 +12,13 @@
             ></p-radioButton>
             <label [for]="'ingredient' + empresa.code" class="ml-2">{{ empresa.name }}</label>
           </div>
-        </div>
 
-        <div class="row" style="display: flex; align-items: center;">
           <form [formGroup]="formGroup">
             <p-selectButton [options]="stateOptions" formControlName="value" optionLabel="label" optionValue="value"></p-selectButton>
           </form>
+        </div>
+
+        <div class="row" style="display: flex; align-items: center;">
 
           <span class="p-float-label" style="margin-top: 20px; margin-bottom: 20px;">
             <input #numeroViajeInput id="float-input" pKeyFilter="int" class="w-full" size="30" pInputText>
