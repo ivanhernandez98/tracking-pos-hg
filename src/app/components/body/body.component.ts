@@ -25,10 +25,12 @@ export class BodyComponent implements OnInit {
   mostrarDetalles: boolean = true;
 
   stateOptions: any[] = [{label: 'V', value: '0'}, {label: 'P', value: '1'}];
+
+  selectOption: any;
   value: string = 'off';
 
   empresas: Empresa[] | undefined;
-  selectedEmpresa: Empresa | undefined;
+  selectedEmpresa: string | undefined;
 
   unidad: string | undefined;
   numeroViaje: number | undefined;
@@ -114,7 +116,7 @@ export class BodyComponent implements OnInit {
       return;
     }
     const numeroViaje = this.numeroViajeInput.nativeElement.value;
-    const empresa = this.selectedEmpresa.toString().toLocaleLowerCase();
+    const empresa = this.selectedEmpresa?.toLocaleLowerCase() || ''; // Usar el código de la empresa directamente
     const tipoSolicitud = this.formGroup.get('value')?.value === '0' ? 0 : 1 ;
     console.log(typeof this.formGroup.get('value')?.value);
 

@@ -3,19 +3,25 @@
   <div class="col-md-6" >
     <p-card header="Rastreo de posiciones satelitales" class="custom-card">
         <div class="flex flex-wrap gap-3" style="display: flex; justify-content: space-between;">
-          <div *ngFor="let empresa of empresas" class="flex align-items-center">
-            <p-radioButton
-              name="empresa"
-              [value]="empresa.code"
-              [(ngModel)]="selectedEmpresa"
-              inputId="{{ 'ingredient' + empresa.code }}"
-            ></p-radioButton>
-            <label [for]="'ingredient' + empresa.code" class="ml-2">{{ empresa.name }}</label>
-          </div>
+
+          <!--
+            <div *ngFor="let empresa of empresas" class="flex align-items-center">
+              <p-radioButton
+                name="empresa"
+                [value]="empresa.code"
+                [(ngModel)]="selectedEmpresa"
+                inputId="{{ 'ingredient' + empresa.code }}"
+              ></p-radioButton>
+              <label [for]="'ingredient' + empresa.code" class="ml-2">{{ empresa.name }}</label>
+            </div>
+          -->
+
+          <p-dropdown [options]="empresas" [(ngModel)]="selectedEmpresa" optionLabel="name" optionValue="code" [showClear]="true" placeholder="Selecciona la empresa"></p-dropdown>
 
           <form [formGroup]="formGroup">
             <p-selectButton [options]="stateOptions" formControlName="value" optionLabel="label" optionValue="value"></p-selectButton>
           </form>
+
         </div>
 
         <div class="row" style="display: flex; align-items: center;">
